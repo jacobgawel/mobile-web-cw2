@@ -7,9 +7,9 @@
 	<div class="row">
 		<div class="col-6 offset-3">
 			<div class="card">
-				<div class="card-header">
-					<h2>Register</div>
-				</div>
+				<h2 class="card-header">
+                    Register
+                </h2>
 				<div class="card-body">
 					<form asp-page="/Account/Register/Index">
                         <input type="hidden" asp-for="Input.ReturnUrl" />
@@ -38,6 +38,18 @@
                             <label for="DateOfBirth">Date of Birth</label>
                             <input type="date" class="form-control" id="DateOfBirth" name="Input.DateOfBirth" autocomplete="off">
                         </div>
+                        
+                        <div class="form-group">
+                            <label asp-for="Input.Constituency">Constituency Select</label>
+                            <select class="form-select" aria-label="Constituency Select" asp-for="Input.Constituency">
+                                <option selected>Open this select menu</option>
+                                <option value="Shangri-la-Town">Shangri-la-Town</option>
+                                <option value="Northern-Kunlun-Mountain">Northern-Kunlun-Mountain</option>
+                                <option value="Western-Shangri-la">Western-Shangri-la</option>
+                                <option value="Naboo-Vallery">Naboo-Vallery</option>
+                                <option value="New-Felucia">New-Felucia</option>
+                            </select>
+                        </div>
 
                         <a class="pb-2 d-block" asp-page="../Login/Index" asp-route-returnUrl="@Model.Input.ReturnUrl">
                             Already registered? Login here
@@ -59,6 +71,10 @@
                     {
                         <div class="alert alert-warning mt-2">
                             <ul>
+                                @if (Model.WarningMessage != null)
+                                {
+                                    @Model.WarningMessage
+                                }
                                 @foreach (var error in Model.RegisterError)
                                 {
                                     <li>@error.Description</li>

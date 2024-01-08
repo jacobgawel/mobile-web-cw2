@@ -14,6 +14,8 @@ public class RegisterViewModel
     public string DateOfBirth { get; set; }
     [Required]
     public string UniqueVoterCode { get; set; }
+    [Required]
+    public string Constituency { get; set; }
 
     // Not required fields
     public string ReturnUrl { get; set; }

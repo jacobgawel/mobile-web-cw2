@@ -1,3 +1,4 @@
+using System.Net.Mail;
 using gevs_identity.Models;
 using IdentityModel;
 using Microsoft.AspNetCore.Authorization;
@@ -27,6 +28,11 @@ namespace gevs_identity.Pages.Account.Register
             "UMT3RLVS", "TZZZCJV8", "UVE5M7FR", "W44QP7XJ", "9FCV9RMT"
         ];
 
+        private readonly List<string> _constituency = [
+            "Shangri-la-Town", "Northern-Kunlun-Mountain", "Western-Shangri-la",
+            "Naboo-Vallery", "New-Felucia"
+        ];
+
         public Index(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
@@ -43,7 +49,10 @@ namespace gevs_identity.Pages.Account.Register
 
         [BindProperty]
         public bool RegisterWarning { get; set; }
-
+        
+        [BindProperty]
+        public string WarningMessage { get; set; }
+        
         public IActionResult OnGet(string returnUrl)
         {
             Input = new RegisterViewModel
@@ -58,50 +67,79 @@ namespace gevs_identity.Pages.Account.Register
         {
             if (Input.Button != "register") return Redirect("~/");
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return Page();
+            
+            var uniqueCodeVerify = false;
+
+            Parallel.ForEach(_uvc, (uvc, state) =>
             {
-                var uniqueCodeVerify = false;
-
-                foreach (var uvc in _uvc)
+                if (uvc == Input.UniqueVoterCode)
                 {
-                    if (uvc == Input.UniqueVoterCode)
-                    {
-                        uniqueCodeVerify = true;
-                        break;
-                    }
+                    uniqueCodeVerify = true;
+                    state.Break();
                 }
+            });
 
-                if (!uniqueCodeVerify)
-                {
-                    RegisterWarning = true;
-                    return Page();
-                }
+            if (!uniqueCodeVerify)
+            {
+                WarningMessage = "The UVC code you entered is invalid";
+                RegisterWarning = true;
+                return Page();
+            }
 
-                var user = new ApplicationUser
-                {
-                    UserName = Input.Email,
-                };
+            if (!_constituency.Contains(Input.Constituency))
+            {
+                RegisterWarning = true;
+                WarningMessage = "Please select valid Constituency";
+                return Page();
+            }
 
-                var result = await _userManager.CreateAsync(user, Input.Password);
+            if (!IsValidEmail(Input.Email))
+            {
+                return Page();
+            }
 
-                if (result.Succeeded)
-                {
-                    await _userManager.AddClaimsAsync(user, new Claim[] {
-                        new Claim(JwtClaimTypes.Name, Input.FullName),
-                        new Claim(JwtClaimTypes.BirthDate, Input.DateOfBirth),
-                        new Claim(JwtClaimTypes.Role, "voter")
-                    });
+            var user = new ApplicationUser
+            {
+                UserName = Input.Email,
+            };
 
-                    RegisterSuccess = true;
-                } else
-                {
-                    RegisterWarning = true;
-                    RegisterError = result.Errors;
+            var result = await _userManager.CreateAsync(user, Input.Password);
 
-                }
+            if (result.Succeeded)
+            {
+                RegisterWarning = false;
+                await _userManager.AddClaimsAsync(user, new[] {
+                    new Claim(JwtClaimTypes.Name, Input.FullName),
+                    new Claim(JwtClaimTypes.BirthDate, Input.DateOfBirth),
+                    new Claim(JwtClaimTypes.Role, "voter"),
+                    new Claim("UVC", Input.UniqueVoterCode),
+                    new Claim("Constituency", Input.Constituency)
+                });
+
+                RegisterSuccess = true;
+            } else
+            {
+                RegisterWarning = true;
+                RegisterError = result.Errors;
             }
 
             return Page();
+        }
+
+        public bool IsValidEmail(string email)
+        {
+            try
+            {
+                var m = new MailAddress(email);
+                return true;
+            }
+            catch (FormatException e)
+            {
+                RegisterWarning = true;
+                WarningMessage = e.Message;
+                return false;
+            }
         }
     }
 }
