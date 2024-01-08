@@ -11,6 +11,12 @@ services:
       context: .
       dockerfile: gevs-api/Dockerfile
 
+  gevs-identity:
+    image: ${DOCKER_REGISTRY-}gevsidentity
+    build:
+      context: .
+      dockerfile: gevs-identity/Dockerfile
+
 volumes:
   postgres_data:
   pgadmin_data:
