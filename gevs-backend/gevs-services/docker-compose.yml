@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+
+  gevsdb:
+    image: postgres
+
+  gevs-api:
+    image: ${DOCKER_REGISTRY-}gevsapi
+    build:
+      context: .
+      dockerfile: gevs-api/Dockerfile
+
+volumes:
+  postgres_data:
+  pgadmin_data:
