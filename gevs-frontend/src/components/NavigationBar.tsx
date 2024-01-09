@@ -29,6 +29,7 @@ import Link from "next/link";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { signIn } from "next-auth/react";
+import { getCurrentUser } from "@/app/actions/authActions";
 
 const components: { title: string; href: string; description: string }[] = [
     {
@@ -45,60 +46,74 @@ const components: { title: string; href: string; description: string }[] = [
     }
 ]
 
-export default function NavigationBar() {
-    return (
-        <NavigationMenu>
-            <NavigationMenuList>
+export default async function NavigationBar() {
 
-                <NavigationMenuItem>
-                    GEVS
-                </NavigationMenuItem>
+  return (
+    <>
+    <div className='flex justify-center m-1 mr-10'>
+    <NavigationMenu>
+        <NavigationMenuList>
 
-                <NavigationMenuItem>
-                    <NavigationMenuTrigger>Options</NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                        {components.map((component) => (
-                            <ListItem
-                            key={component.title}
-                            title={component.title}
-                            href={component.href}
-                            >
-                            {component.description}
-                            </ListItem>
-                        ))}
-                        </ul>
-                    </NavigationMenuContent>
-                </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href={"/"}>
+                GEVS
+              </Link>
+            </NavigationMenuItem>
 
-                <NavigationMenuItem>
-                    <DropdownMenu>
-                        <Button variant="ghost" onClick={() => signIn('id-server', {callbackUrl: '/'})}>Login</Button>
-                        <DropdownMenuTrigger asChild>
-                            <Button variant="ghost">Profile</Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent className="w-56">
-                            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuGroup>
-                            <DropdownMenuItem>
-                                Profile
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                Election Dashboard
-                            </DropdownMenuItem>
-                            </DropdownMenuGroup>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem>
-                            Log out
-                            </DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
-                </NavigationMenuItem>
-
-            </NavigationMenuList>
-        </NavigationMenu>
-    )
+            <NavigationMenuItem>
+                <NavigationMenuTrigger>Options</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                    {components.map((component) => (
+                        <ListItem
+                        key={component.title}
+                        title={component.title}
+                        href={component.href}
+                        >
+                        {component.description}
+                        </ListItem>
+                    ))}
+                    </ul>
+                </NavigationMenuContent>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button variant="ghost">Profile</Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-56">
+                        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuGroup>
+                        <DropdownMenuItem>
+                          Profile
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem>
+                          <Link href={"/session"}>
+                                Session
+                          </Link> 
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem>
+                          Election Dashboard
+                        </DropdownMenuItem>
+                        </DropdownMenuGroup>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem>
+                          Log out
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Button variant="ghost" onClick={() => signIn('id-server', {callbackUrl: '/'})}>Login</Button>
+            </NavigationMenuItem>
+        </NavigationMenuList>
+    </NavigationMenu>
+    </div>
+    </>
+  )
 }
 
 const ListItem = React.forwardRef<

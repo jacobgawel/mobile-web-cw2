@@ -33,13 +33,14 @@ namespace gevs_identity
                 {
                     ClientId = "nextApp",
                     ClientName = "nextApp",
-                    ClientSecrets = { new Secret("secret".Sha256()) },
                     AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
                     RequirePkce = false,
-                    RedirectUris = { "http://localhost:3000/api/auth/callback/id-server" },
+                    AllowedScopes = {"openid", "profile", "gevsApp"},
                     AllowOfflineAccess = true,
-                    AllowedScopes = { "openid", "profile", "gevsApp" },
                     AccessTokenLifetime = 3600*24*30,
+                    RedirectUris = {"http://localhost:3000/api/auth/callback/id-server"},
+                    ClientSecrets = new [] {new Secret("secret".Sha256())},
+                    AlwaysIncludeUserClaimsInIdToken = true,
                 }
             };
     }

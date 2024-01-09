@@ -1,6 +1,7 @@
 using Duende.IdentityServer;
 using gevs_identity.Data;
 using gevs_identity.Models;
+using gevs_identity.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -39,7 +40,8 @@ namespace gevs_identity
                 .AddInMemoryIdentityResources(Config.IdentityResources)
                 .AddInMemoryApiScopes(Config.ApiScopes)
                 .AddInMemoryClients(Config.Clients)
-                .AddAspNetIdentity<ApplicationUser>();
+                .AddAspNetIdentity<ApplicationUser>()
+                .AddProfileService<CustomProfileService>();
 
             builder.Services.ConfigureApplicationCookie(options =>
             {
