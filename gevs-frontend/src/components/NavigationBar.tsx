@@ -27,7 +27,8 @@ import {
 } from "@/components/ui/dropdown-menu"
 import Link from "next/link";
 import React from "react";
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
+import { signIn } from "next-auth/react";
 
 const components: { title: string; href: string; description: string }[] = [
     {
@@ -72,6 +73,7 @@ export default function NavigationBar() {
 
                 <NavigationMenuItem>
                     <DropdownMenu>
+                        <Button variant="ghost" onClick={() => signIn('id-server', {callbackUrl: '/'})}>Login</Button>
                         <DropdownMenuTrigger asChild>
                             <Button variant="ghost">Profile</Button>
                         </DropdownMenuTrigger>
