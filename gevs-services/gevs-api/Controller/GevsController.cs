@@ -25,6 +25,20 @@ public class GevsController : ControllerBase
         _logger.LogInformation("Fetching all candidates");
         return Ok(await _candidateRepository.GetCandidates());
     }
-    
-    
+
+    [HttpGet("constituency/{constituency}")]
+    [ProducesResponseType(typeof(ConstituencyResult), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<ConstituencyResult>> GetConstituencyResult(string constituency)
+    {
+        var candidates = await _candidateRepository.GetCandidatesByConstituency(constituency);
+
+        if (candidates == null)
+        {
+            return NotFound();
+        }
+        
+        var constituencyResults = await _candidateRepository.GetConstituencyResults(candidates, constituency);
+
+        return Ok(constituencyResults);
+    }
 }

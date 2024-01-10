@@ -54,4 +54,44 @@ public class CandidateRepository(GevsDbContext context) : ICandidateRepository
         }
     }
 
+    public async Task<List<Candidate>?> GetCandidatesByConstituency(string constituencyName)
+    {
+        var constituency = await context.Constituencies.AsNoTracking()
+            .FirstOrDefaultAsync(c => c.Name.ToLower().Equals(constituencyName.ToLower()));
+
+        
+        if (constituency == null) return null;
+        
+        var constituencyId = constituency.Id;
+        
+        var candidates = await context.Candidates
+            .Where(c => c.ConstituencyId == constituencyId).ToListAsync();
+        
+        return candidates;
+    }
+
+    public async Task<ConstituencyResult> GetConstituencyResults(List<Candidate> candidates, string constituencyName)
+    {
+        List<CandidateResult> candidateResults = new List<CandidateResult>();
+
+        foreach (var candidate in candidates)
+        {
+            CandidateResult temp = new CandidateResult();
+            temp.Name = candidate.Name;
+            var party = await context.Parties.FirstOrDefaultAsync(p => p.Id == candidate.PartyId);
+            temp.Party = party!.Name;
+            temp.Vote = candidate.VoteCount;
+            candidateResults.Add(temp);
+        }
+
+        var sortedResult = candidateResults.OrderByDescending(cr => cr.Vote).ToList();
+        
+        ConstituencyResult result = new ConstituencyResult
+        {
+            Constituency = constituencyName,
+            Result = sortedResult
+        };
+
+        return result;
+    }
 }

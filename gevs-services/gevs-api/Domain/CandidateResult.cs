@@ -7,5 +7,5 @@ public class CandidateResult
 {
     public string Name { get; set; }
     public string Party { get; set; }
-    public string Vote { get; set; }
+    public int Vote { get; set; }
 }
