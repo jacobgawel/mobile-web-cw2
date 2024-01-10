@@ -8,8 +8,8 @@ public class Candidate
     public string Name { get; set; }
     public Guid PartyId { get; set; }
     public Guid ConstituencyId { get; set; }
-    public int VoteCount { get; set; } = 0;
+    public int VoteCount { get; set; }
     
-    public Constituency Constituency { get; set; }
-    public Party Party { get; set; }
+    private Constituency Constituency { get; set; }
+    private Party Party { get; set; }
 }

@@ -8,8 +8,7 @@ public class CandidateRepository(GevsDbContext context) : ICandidateRepository
 {
     public async Task<List<Candidate>> GetCandidates()
     {
-        var candidates = await context.Candidates.AsNoTracking().ToListAsync();
-        return candidates;
+        return await context.Candidates.AsNoTracking().ToListAsync();;
     }
 
     public async Task<Candidate?> GetCandidateById(Guid id)
@@ -52,6 +51,21 @@ public class CandidateRepository(GevsDbContext context) : ICandidateRepository
             Console.WriteLine(ex.Message);
             return false;
         }
+    }
+
+    public async Task<bool> AddVoteToCandidate(Guid id)
+    {
+        var candidate = await context.Candidates.FirstOrDefaultAsync(c => c.Id == id);
+
+        if (candidate == null) return false;
+        
+        var votes = candidate.VoteCount;
+        var newTotal = votes + 1;
+        
+        candidate.VoteCount = newTotal;
+        await context.SaveChangesAsync();
+        
+        return true;
     }
 
     public async Task<List<Candidate>?> GetCandidatesByConstituency(string constituencyName)

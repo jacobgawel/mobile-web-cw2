@@ -19,7 +19,7 @@ namespace gevs_api.Core.Migrations
                 {
                     Name = table.Column<string>(type: "text", nullable: false),
                     Party = table.Column<string>(type: "text", nullable: false),
-                    Vote = table.Column<string>(type: "text", nullable: false)
+                    Vote = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -93,27 +93,27 @@ namespace gevs_api.Core.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("2601cd67-9625-4c13-9767-593eb79366fd"), "Northern-Kunlun-Mountain" },
-                    { new Guid("277b8634-156b-447c-9042-c7359480b0d2"), "New-Felucia" },
-                    { new Guid("577ecc28-a621-417a-aba9-10e82f6a791a"), "Western-Shangri-la" },
-                    { new Guid("9c91e290-c10e-4c77-b1b5-eef3de263c5b"), "Naboo-Vallery" },
-                    { new Guid("dfe5185f-da46-4133-9032-7aa3b8550dcb"), "Shangri-la-Town" }
+                    { new Guid("0d351d87-973b-49f3-a457-3a766d610527"), "Northern-Kunlun-Mountain" },
+                    { new Guid("2139d8e8-6c6f-4236-90ef-371ccafd0d5f"), "New-Felucia" },
+                    { new Guid("3a9b3651-5e8b-4e5d-acaf-4458ce1c9817"), "Naboo-Vallery" },
+                    { new Guid("5867da0d-560e-4f3e-b7b7-29a953e13855"), "Shangri-la-Town" },
+                    { new Guid("95cd3ae7-024a-4414-b2ca-6b577bbc44fc"), "Western-Shangri-la" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Elections",
                 columns: new[] { "Id", "Ongoing" },
-                values: new object[] { new Guid("967939fa-3c70-418d-a8ba-a06748bab46e"), false });
+                values: new object[] { new Guid("8dd4041f-8a4c-4479-8a67-b591d412098b"), false });
 
             migrationBuilder.InsertData(
                 table: "Parties",
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("483f1c77-2f20-4d6c-b1e1-1e0d48509aa5"), "Red Party" },
-                    { new Guid("4ff82a3a-a7b7-4eeb-8938-74a86209181d"), "Independent" },
-                    { new Guid("6d41c47b-407b-4b8d-bb54-7e4190fcd5ee"), "Blue Party" },
-                    { new Guid("9e188e46-ed6d-4c12-9074-1decd992a388"), "Yellow Party" }
+                    { new Guid("1d13e53f-c615-415a-a0d2-4a85f6cbbf31"), "Red Party" },
+                    { new Guid("8d86cc06-d8e8-4d45-805e-bc31d3737903"), "Blue Party" },
+                    { new Guid("9384b241-49f8-4cb9-a7da-6b527bf592dc"), "Yellow Party" },
+                    { new Guid("f7329878-3664-4255-be4b-b2f6950590d6"), "Independent" }
                 });
 
             migrationBuilder.InsertData(
@@ -121,9 +121,9 @@ namespace gevs_api.Core.Migrations
                 columns: new[] { "Id", "ConstituencyId", "Name", "PartyId", "VoteCount" },
                 values: new object[,]
                 {
-                    { new Guid("4b169931-e458-4650-b463-3f7b126ff95c"), new Guid("2601cd67-9625-4c13-9767-593eb79366fd"), "candidate 1", new Guid("9e188e46-ed6d-4c12-9074-1decd992a388"), 4 },
-                    { new Guid("588759e7-4bd2-4a77-bbe9-2fb39f9eb478"), new Guid("2601cd67-9625-4c13-9767-593eb79366fd"), "candidate 3", new Guid("9e188e46-ed6d-4c12-9074-1decd992a388"), 1 },
-                    { new Guid("87402645-7a3f-4c2f-904b-5475627e12bd"), new Guid("2601cd67-9625-4c13-9767-593eb79366fd"), "candidate 2", new Guid("9e188e46-ed6d-4c12-9074-1decd992a388"), 2 }
+                    { new Guid("21c132f6-e949-4e25-9ef4-199020bded58"), new Guid("0d351d87-973b-49f3-a457-3a766d610527"), "candidate 2", new Guid("8d86cc06-d8e8-4d45-805e-bc31d3737903"), 2 },
+                    { new Guid("78e8a852-7d7a-4e9b-9b8a-f8472a7bf75a"), new Guid("0d351d87-973b-49f3-a457-3a766d610527"), "candidate 3", new Guid("9384b241-49f8-4cb9-a7da-6b527bf592dc"), 1 },
+                    { new Guid("ac4ce7eb-669b-4aa0-aa2a-67c74d444770"), new Guid("0d351d87-973b-49f3-a457-3a766d610527"), "candidate 1", new Guid("1d13e53f-c615-415a-a0d2-4a85f6cbbf31"), 4 }
                 });
 
             migrationBuilder.CreateIndex(

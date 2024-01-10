@@ -19,7 +19,8 @@ namespace gevs_api
             // Add services to the container.
             
             builder.Services.AddScoped<ICandidateRepository, CandidateRepository>();
-
+            builder.Services.AddScoped<IPartyRepository, PartyRepository>();
+            builder.Services.AddScoped<IConstituencyRepository, ConstituencyRepository>();
             
             builder.Services.AddControllers();
 

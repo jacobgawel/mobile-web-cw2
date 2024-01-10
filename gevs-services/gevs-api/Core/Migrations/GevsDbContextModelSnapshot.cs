@@ -52,26 +52,26 @@ namespace gevs_api.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4b169931-e458-4650-b463-3f7b126ff95c"),
-                            ConstituencyId = new Guid("2601cd67-9625-4c13-9767-593eb79366fd"),
+                            Id = new Guid("ac4ce7eb-669b-4aa0-aa2a-67c74d444770"),
+                            ConstituencyId = new Guid("0d351d87-973b-49f3-a457-3a766d610527"),
                             Name = "candidate 1",
-                            PartyId = new Guid("9e188e46-ed6d-4c12-9074-1decd992a388"),
+                            PartyId = new Guid("1d13e53f-c615-415a-a0d2-4a85f6cbbf31"),
                             VoteCount = 4
                         },
                         new
                         {
-                            Id = new Guid("87402645-7a3f-4c2f-904b-5475627e12bd"),
-                            ConstituencyId = new Guid("2601cd67-9625-4c13-9767-593eb79366fd"),
+                            Id = new Guid("21c132f6-e949-4e25-9ef4-199020bded58"),
+                            ConstituencyId = new Guid("0d351d87-973b-49f3-a457-3a766d610527"),
                             Name = "candidate 2",
-                            PartyId = new Guid("9e188e46-ed6d-4c12-9074-1decd992a388"),
+                            PartyId = new Guid("8d86cc06-d8e8-4d45-805e-bc31d3737903"),
                             VoteCount = 2
                         },
                         new
                         {
-                            Id = new Guid("588759e7-4bd2-4a77-bbe9-2fb39f9eb478"),
-                            ConstituencyId = new Guid("2601cd67-9625-4c13-9767-593eb79366fd"),
+                            Id = new Guid("78e8a852-7d7a-4e9b-9b8a-f8472a7bf75a"),
+                            ConstituencyId = new Guid("0d351d87-973b-49f3-a457-3a766d610527"),
                             Name = "candidate 3",
-                            PartyId = new Guid("9e188e46-ed6d-4c12-9074-1decd992a388"),
+                            PartyId = new Guid("9384b241-49f8-4cb9-a7da-6b527bf592dc"),
                             VoteCount = 1
                         });
                 });
@@ -86,9 +86,8 @@ namespace gevs_api.Core.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Vote")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("Vote")
+                        .HasColumnType("integer");
 
                     b.ToTable("CandidateResults");
                 });
@@ -110,27 +109,27 @@ namespace gevs_api.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("dfe5185f-da46-4133-9032-7aa3b8550dcb"),
+                            Id = new Guid("5867da0d-560e-4f3e-b7b7-29a953e13855"),
                             Name = "Shangri-la-Town"
                         },
                         new
                         {
-                            Id = new Guid("2601cd67-9625-4c13-9767-593eb79366fd"),
+                            Id = new Guid("0d351d87-973b-49f3-a457-3a766d610527"),
                             Name = "Northern-Kunlun-Mountain"
                         },
                         new
                         {
-                            Id = new Guid("577ecc28-a621-417a-aba9-10e82f6a791a"),
+                            Id = new Guid("95cd3ae7-024a-4414-b2ca-6b577bbc44fc"),
                             Name = "Western-Shangri-la"
                         },
                         new
                         {
-                            Id = new Guid("9c91e290-c10e-4c77-b1b5-eef3de263c5b"),
+                            Id = new Guid("3a9b3651-5e8b-4e5d-acaf-4458ce1c9817"),
                             Name = "Naboo-Vallery"
                         },
                         new
                         {
-                            Id = new Guid("277b8634-156b-447c-9042-c7359480b0d2"),
+                            Id = new Guid("2139d8e8-6c6f-4236-90ef-371ccafd0d5f"),
                             Name = "New-Felucia"
                         });
                 });
@@ -151,7 +150,7 @@ namespace gevs_api.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("967939fa-3c70-418d-a8ba-a06748bab46e"),
+                            Id = new Guid("8dd4041f-8a4c-4479-8a67-b591d412098b"),
                             Ongoing = false
                         });
                 });
@@ -173,22 +172,22 @@ namespace gevs_api.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("483f1c77-2f20-4d6c-b1e1-1e0d48509aa5"),
+                            Id = new Guid("1d13e53f-c615-415a-a0d2-4a85f6cbbf31"),
                             Name = "Red Party"
                         },
                         new
                         {
-                            Id = new Guid("6d41c47b-407b-4b8d-bb54-7e4190fcd5ee"),
+                            Id = new Guid("8d86cc06-d8e8-4d45-805e-bc31d3737903"),
                             Name = "Blue Party"
                         },
                         new
                         {
-                            Id = new Guid("9e188e46-ed6d-4c12-9074-1decd992a388"),
+                            Id = new Guid("9384b241-49f8-4cb9-a7da-6b527bf592dc"),
                             Name = "Yellow Party"
                         },
                         new
                         {
-                            Id = new Guid("4ff82a3a-a7b7-4eeb-8938-74a86209181d"),
+                            Id = new Guid("f7329878-3664-4255-be4b-b2f6950590d6"),
                             Name = "Independent"
                         });
                 });

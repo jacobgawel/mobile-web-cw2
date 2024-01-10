@@ -1,4 +1,3 @@
-using Duende.IdentityServer;
 using gevs_identity.Data;
 using gevs_identity.Models;
 using gevs_identity.Services;
@@ -16,8 +15,13 @@ namespace gevs_identity
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+            
+            // change the default password config to not require upper case so the default pass 
+            // credentials work
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+                {
+                    options.Password.RequireUppercase = false;
+                })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -28,7 +32,7 @@ namespace gevs_identity
                     options.Events.RaiseInformationEvents = true;
                     options.Events.RaiseFailureEvents = true;
                     options.Events.RaiseSuccessEvents = true;
-
+                    
                     if (builder.Environment.IsEnvironment("Docker"))
                     {
                         options.IssuerUri = "gevs-identity";

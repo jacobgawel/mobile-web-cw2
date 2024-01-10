@@ -8,6 +8,7 @@ public interface ICandidateRepository
     Task<Candidate?> GetCandidateById(Guid id);
     Task<Guid> CreateCandidate(Candidate candidate);
     Task<bool> DeleteCandidates();
+    Task<bool> AddVoteToCandidate(Guid id);
     Task<List<Candidate>?> GetCandidatesByConstituency(string constituencyName);
     Task<ConstituencyResult> GetConstituencyResults(List<Candidate> candidates, string constituencyName);
 }

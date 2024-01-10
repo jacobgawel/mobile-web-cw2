@@ -40,7 +40,7 @@ namespace gevs_identity
                 {
                     UserName = "election@shangrila.gov.sr",
                 };
-                var result = userMgr.CreateAsync(admin, "Shangrila2024$").Result;
+                var result = userMgr.CreateAsync(admin, "shangrila2024$").Result;
                 if (!result.Succeeded)
                 {
                     throw new Exception(result.Errors.First().Description);
