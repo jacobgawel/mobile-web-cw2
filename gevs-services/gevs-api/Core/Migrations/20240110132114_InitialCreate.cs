@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace gevs_api.Core.Migrations
 {
     /// <inheritdoc />
@@ -60,6 +62,17 @@ namespace gevs_api.Core.Migrations
                         principalTable: "Parties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Parties",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { new Guid("4befc044-3523-4280-823b-cc5c1902c776"), "Red Party" },
+                    { new Guid("5677f170-d285-4687-aa92-4c3048aa58b8"), "Blue Party" },
+                    { new Guid("983a15c2-8fe6-4477-bffb-d6704bf8b11a"), "Yellow Party" },
+                    { new Guid("f3a3c3f3-8628-47a2-b30b-57787377ab61"), "Independent" }
                 });
 
             migrationBuilder.CreateIndex(

@@ -17,6 +17,7 @@ public class DbInitializer
                 using var scope = app.Services.CreateScope();
                 var dbContext = scope.ServiceProvider.GetService<GevsDbContext>();
                 dbContext?.Database.Migrate();
+                dbContext?.Database.EnsureCreated();
                 break;
             }
             catch (Npgsql.NpgsqlException e)

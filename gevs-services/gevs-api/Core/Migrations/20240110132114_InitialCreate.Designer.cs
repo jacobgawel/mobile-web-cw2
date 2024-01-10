@@ -12,7 +12,7 @@ using gevs_api.Data;
 namespace gevs_api.Core.Migrations
 {
     [DbContext(typeof(GevsDbContext))]
-    [Migration("20240110025404_InitialCreate")]
+    [Migration("20240110132114_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -80,6 +80,28 @@ namespace gevs_api.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Parties");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("4befc044-3523-4280-823b-cc5c1902c776"),
+                            Name = "Red Party"
+                        },
+                        new
+                        {
+                            Id = new Guid("5677f170-d285-4687-aa92-4c3048aa58b8"),
+                            Name = "Blue Party"
+                        },
+                        new
+                        {
+                            Id = new Guid("983a15c2-8fe6-4477-bffb-d6704bf8b11a"),
+                            Name = "Yellow Party"
+                        },
+                        new
+                        {
+                            Id = new Guid("f3a3c3f3-8628-47a2-b30b-57787377ab61"),
+                            Name = "Independent"
+                        });
                 });
 
             modelBuilder.Entity("gevs_api.Domain.Candidate", b =>
