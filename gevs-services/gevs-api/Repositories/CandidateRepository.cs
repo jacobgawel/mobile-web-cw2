@@ -8,7 +8,7 @@ public class CandidateRepository(GevsDbContext context) : ICandidateRepository
 {
     public async Task<List<Candidate>> GetCandidates()
     {
-        return await context.Candidates.AsNoTracking().ToListAsync();;
+        return await context.Candidates.AsNoTracking().ToListAsync();
     }
 
     public async Task<Candidate?> GetCandidateById(Guid id)

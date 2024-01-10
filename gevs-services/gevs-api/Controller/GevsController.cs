@@ -16,7 +16,11 @@ public class GevsController : ControllerBase
     private readonly IElectionResultsRepository _electionResultsRepository;
     
     // GET endpoints for candidate
-    public GevsController(ICandidateRepository candidateRepository, ILogger<GevsController> logger, IPartyRepository partyRepository, IConstituencyRepository constituencyRepository, IElectionResultsRepository electionResultsRepository)
+    public GevsController(ICandidateRepository candidateRepository, 
+        ILogger<GevsController> logger, 
+        IPartyRepository partyRepository, 
+        IConstituencyRepository constituencyRepository, 
+        IElectionResultsRepository electionResultsRepository)
     {
         _candidateRepository = candidateRepository;
         _logger = logger;

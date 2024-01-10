@@ -45,18 +45,29 @@ public class ElectionResultsRepository(GevsDbContext context) : IElectionResults
             var constituencyId = constituency.Id;
             var candidates = await context.Candidates.AsNoTracking()
                 .Where(c => c.ConstituencyId == constituencyId).ToListAsync();
-            
-            var candidate = candidates
-                .Aggregate((highest, next) => next.VoteCount > highest.VoteCount ? next : highest);
-            
-            var partyId = candidate.PartyId;
-            var party = await context.Parties.FirstOrDefaultAsync(p => p.Id == partyId);
-            
-            electionResult.Seats.FirstOrDefault(s => party != null && s.Party == party.Name)!.Seat += 1;
+
+            try
+            {
+                var candidate = candidates
+                    .Aggregate((highest, next) => next.VoteCount > highest.VoteCount ? next : highest);
+
+                var partyId = candidate.PartyId;
+                var party = await context.Parties.FirstOrDefaultAsync(p => p.Id == partyId);
+
+                electionResult.Seats.FirstOrDefault(s => party != null && s.Party == party.Name)!.Seat += 1;
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
         
         var winnerParty = electionResult.Seats
             .Aggregate((next, party) => next.Seat > party.Seat ? next : party);
+
+        var sortedResults = electionResult.Seats.OrderByDescending(er => er.Seat).ToList();
+
+        electionResult.Seats = sortedResults;
 
         var election = await context.Elections.AsNoTracking().ToListAsync();
         var electionStatus = election[0];
