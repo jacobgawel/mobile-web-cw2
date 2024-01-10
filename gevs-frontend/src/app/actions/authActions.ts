@@ -6,15 +6,17 @@ export async function getSession() {
 }
 
 export async function getCurrentUser() {
+    // Gets the current user session e.g. { name, image, etc... }
     try {
         const session = await getSession();
-        console.log({session})
 
-        if (!session) return null;
-        
+        if (!session) {
+            return null;
+        }
+
         return session.user;
-
-    } catch (error) {
+    } catch (e) {
+        console.error(e);
         return null;
     }
 }

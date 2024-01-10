@@ -49,7 +49,9 @@ namespace gevs_identity
                 result = userMgr.AddClaimsAsync(admin, new Claim[]{
                                 new Claim(JwtClaimTypes.Name, "Admin"),
                                 new Claim(JwtClaimTypes.Role, "admin"),
-                                new Claim(JwtClaimTypes.BirthDate, "2000-10-13")
+                                new Claim(JwtClaimTypes.BirthDate, "2000-10-13"),
+                                new Claim("UVC", "admin"),
+                                new Claim("Constituency", "admin")
                             }).Result;
                 if (!result.Succeeded)
                 {

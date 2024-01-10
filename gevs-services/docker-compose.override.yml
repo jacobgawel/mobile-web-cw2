@@ -24,6 +24,7 @@ services:
 
   gevs-identity:
     container_name: gevs-identity
+    restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_HTTP_PORTS=8100
