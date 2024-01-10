@@ -88,7 +88,7 @@ public class GevsController : ControllerBase
     }
     
     // Vote endpoint for candidate
-    [HttpGet("vote/candidate/{id}")]
+    [HttpPut("vote/candidate/{id}")]
     [ProducesResponseType(typeof(Candidate), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<Candidate>> AddVoteToCandidate(string id)
     {

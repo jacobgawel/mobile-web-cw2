@@ -62,18 +62,30 @@ public class ElectionResultsRepository(GevsDbContext context) : IElectionResults
             }
         }
         
-        var winnerParty = electionResult.Seats
-            .Aggregate((next, party) => next.Seat > party.Seat ? next : party);
-
-        var sortedResults = electionResult.Seats.OrderByDescending(er => er.Seat).ToList();
-
-        electionResult.Seats = sortedResults;
-
         var election = await context.Elections.AsNoTracking().ToListAsync();
         var electionStatus = election[0];
         
-        electionResult.Status = electionStatus.Ongoing ? "Pending" : "Completed";
-        electionResult.Winner = winnerParty.Party;
+        var totalSeats = constituencies.Count;
+        var majorityThreshold = totalSeats / 2;
+
+        var winnerParty = electionResult.Seats
+            .Aggregate((highest, next) => next.Seat > highest.Seat ? next : highest);
+
+        var isHungParliament = winnerParty.Seat <= majorityThreshold;
+
+        if (isHungParliament)
+        {
+            electionResult.Status = "Hung Parliament";
+        }
+        else
+        {
+            electionResult.Status = electionStatus.Ongoing ? "Pending" : "Completed";
+            electionResult.Winner = winnerParty.Party;
+        }
+        
+        var sortedResults = electionResult.Seats.OrderByDescending(er => er.Seat).ToList();
+
+        electionResult.Seats = sortedResults;
 
         return electionResult;
     }

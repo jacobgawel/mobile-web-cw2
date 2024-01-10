@@ -147,7 +147,7 @@ public class GevsDbContext : DbContext
             {
                 Id = Guid.NewGuid(),
                 Name = "candidate 1",
-                PartyId = redId,
+                PartyId = independentId,
                 ConstituencyId = westernId,
                 VoteCount = 5
             },
@@ -184,7 +184,7 @@ public class GevsDbContext : DbContext
                 Name = "candidate 2",
                 PartyId = blueId,
                 ConstituencyId = nabooId,
-                VoteCount = 5
+                VoteCount = 10
             },
             new Candidate
             {
@@ -211,7 +211,7 @@ public class GevsDbContext : DbContext
                 Name = "candidate 2",
                 PartyId = blueId,
                 ConstituencyId = newId,
-                VoteCount = 2
+                VoteCount = 10
             },
             new Candidate
             {
