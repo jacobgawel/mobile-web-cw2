@@ -29,7 +29,7 @@ public class ElectionResultsRepository(GevsDbContext context) : IElectionResults
 
         Seats independent = new Seats()
         {
-            Party = "Indepenent",
+            Party = "Independent",
             Seat = 0
         };
         
@@ -58,7 +58,10 @@ public class ElectionResultsRepository(GevsDbContext context) : IElectionResults
         var winnerParty = electionResult.Seats
             .Aggregate((next, party) => next.Seat > party.Seat ? next : party);
 
-        electionResult.Status = "Completed";
+        var election = await context.Elections.AsNoTracking().ToListAsync();
+        var electionStatus = election[0];
+        
+        electionResult.Status = electionStatus.Ongoing ? "Pending" : "Completed";
         electionResult.Winner = winnerParty.Party;
 
         return electionResult;

@@ -13,14 +13,16 @@ public class GevsController : ControllerBase
     private readonly IPartyRepository _partyRepository;
     private readonly IConstituencyRepository _constituencyRepository;
     private readonly ILogger<GevsController> _logger;
+    private readonly IElectionResultsRepository _electionResultsRepository;
     
     // GET endpoints for candidate
-    public GevsController(ICandidateRepository candidateRepository, ILogger<GevsController> logger, IPartyRepository partyRepository, IConstituencyRepository constituencyRepository)
+    public GevsController(ICandidateRepository candidateRepository, ILogger<GevsController> logger, IPartyRepository partyRepository, IConstituencyRepository constituencyRepository, IElectionResultsRepository electionResultsRepository)
     {
         _candidateRepository = candidateRepository;
         _logger = logger;
         _partyRepository = partyRepository;
         _constituencyRepository = constituencyRepository;
+        _electionResultsRepository = electionResultsRepository;
     }
 
     [HttpGet("candidate", Name = "GetCandidate")]
@@ -99,5 +101,10 @@ public class GevsController : ControllerBase
     }
     
     // results endpoint
-    
+    [HttpGet("results")]
+    [ProducesResponseType(typeof(ElectionResult), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<ElectionResult>> GetElectionResult()
+    {
+        return Ok(await _electionResultsRepository.GetElectionResults());
+    }
 }
