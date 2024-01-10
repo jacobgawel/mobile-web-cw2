@@ -22,6 +22,7 @@ namespace gevs_api
             builder.Services.AddScoped<IPartyRepository, PartyRepository>();
             builder.Services.AddScoped<IConstituencyRepository, ConstituencyRepository>();
             builder.Services.AddScoped<IElectionResultsRepository, ElectionResultsRepository>();
+            builder.Services.AddScoped<IElectionRepository, ElectionRepository>();
             
             builder.Services.AddControllers();
 

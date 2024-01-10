@@ -52,7 +52,7 @@ public class ElectionResultsRepository(GevsDbContext context) : IElectionResults
                     .Aggregate((highest, next) => next.VoteCount > highest.VoteCount ? next : highest);
 
                 var partyId = candidate.PartyId;
-                var party = await context.Parties.FirstOrDefaultAsync(p => p.Id == partyId);
+                var party = await context.Parties.AsNoTracking().FirstOrDefaultAsync(p => p.Id == partyId);
 
                 electionResult.Seats.FirstOrDefault(s => party != null && s.Party == party.Name)!.Seat += 1;
             }

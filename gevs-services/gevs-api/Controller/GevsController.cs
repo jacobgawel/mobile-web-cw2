@@ -14,19 +14,22 @@ public class GevsController : ControllerBase
     private readonly IConstituencyRepository _constituencyRepository;
     private readonly ILogger<GevsController> _logger;
     private readonly IElectionResultsRepository _electionResultsRepository;
+    private readonly IElectionRepository _electionRepository;
     
     // GET endpoints for candidate
     public GevsController(ICandidateRepository candidateRepository, 
         ILogger<GevsController> logger, 
         IPartyRepository partyRepository, 
         IConstituencyRepository constituencyRepository, 
-        IElectionResultsRepository electionResultsRepository)
+        IElectionResultsRepository electionResultsRepository, 
+        IElectionRepository electionRepository)
     {
         _candidateRepository = candidateRepository;
         _logger = logger;
         _partyRepository = partyRepository;
         _constituencyRepository = constituencyRepository;
         _electionResultsRepository = electionResultsRepository;
+        _electionRepository = electionRepository;
     }
 
     [HttpGet("candidate", Name = "GetCandidate")]
@@ -110,5 +113,20 @@ public class GevsController : ControllerBase
     public async Task<ActionResult<ElectionResult>> GetElectionResult()
     {
         return Ok(await _electionResultsRepository.GetElectionResults());
+    }
+    
+    // election management
+    [HttpGet("admin/election")]
+    [ProducesResponseType(typeof(Election), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<Election>> GetElectionStatus()
+    {
+        return Ok(await _electionRepository.GetElection());
+    }
+
+    [HttpPut("admin/election/{status:bool}")]
+    [ProducesResponseType(typeof(Election), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<Election>> UpdateElectionStatus(bool status)
+    {
+        return Ok(await _electionRepository.UpdateElectionStatus(status));
     }
 }

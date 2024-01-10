@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
 
 namespace gevs_identity.Pages.Account.Register
 {
@@ -86,7 +87,18 @@ namespace gevs_identity.Pages.Account.Register
                 RegisterWarning = true;
                 return Page();
             }
+            
+            var users = await _userManager.Users.ToListAsync();
+            var isUvcRedeemed = users.Any(user => 
+                _userManager.GetClaimsAsync(user).Result.Any(c => c.Type == "UVC" && c.Value == Input.UniqueVoterCode));
 
+            if (isUvcRedeemed)
+            {
+                WarningMessage = "The UVC code you entered has already been redeemed";
+                RegisterWarning = true;
+                return Page();
+            }
+            
             if (!_constituency.Contains(Input.Constituency))
             {
                 RegisterWarning = true;
