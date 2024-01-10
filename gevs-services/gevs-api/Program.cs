@@ -1,5 +1,6 @@
 using gevs_api.Core;
 using gevs_api.Data;
+using gevs_api.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace gevs_api
@@ -16,6 +17,9 @@ namespace gevs_api
             });
 
             // Add services to the container.
+            
+            builder.Services.AddScoped<ICandidateRepository, CandidateRepository>();
+
             
             builder.Services.AddControllers();
 
