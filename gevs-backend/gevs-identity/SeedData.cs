@@ -25,14 +25,6 @@ namespace gevs_identity
             // checks to see if the admin exists
             var admin = userMgr.FindByNameAsync("admin").Result;
 
-            // potentially seeded users should have:
-            // VoterId*
-            // DoB* 
-            // Full Name*
-            // Password*
-            // Contituency*
-            // Unique Voter Code (UVC)*
-
             // create the admin user
             if (admin == null)
             {

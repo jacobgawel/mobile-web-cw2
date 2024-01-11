@@ -174,6 +174,23 @@ namespace gevs_api.Controller
         [ProducesResponseType(typeof(Election), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<Election>> UpdateElectionStatus(bool status)
         {
+            if (User.Identity is not ClaimsIdentity identity)
+            {
+                return Forbid();
+            }
+
+            var role = identity.FindFirst(ClaimTypes.Role);
+
+            if (role == null)
+            {
+                return BadRequest("The user has no role");
+            }
+
+            if (role.Value != "admin")
+            {
+                return Forbid();
+            }
+
             return Ok(await _electionRepository.UpdateElectionStatus(status));
         }
 
@@ -181,6 +198,22 @@ namespace gevs_api.Controller
         [HttpDelete("admin/delete")]
         public async Task<ActionResult<bool>> DeleteElectionVoteHistory()
         {
+            if (User.Identity is not ClaimsIdentity identity)
+            {
+                return Forbid();
+            }
+
+            var role = identity.FindFirst(ClaimTypes.Role);
+
+            if (role == null)
+            {
+                return BadRequest("The user has no role");
+            }
+
+            if (role.Value != "admin")
+            {
+                return Forbid();
+            }
 
             return Ok(await _voteHistoryRepository.DeleteVoteHistory());
         }
