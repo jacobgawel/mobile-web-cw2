@@ -1,0 +1,40 @@
+version: '3.4'
+
+services:
+
+  gevsdb:
+    container_name: gevsdb
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: gevsdb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+  gevs-api:
+    container_name: gevs-api
+    restart: always
+    depends_on:
+      - gevsdb
+      - gevs-identity
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings:DefaultConnection=Server=gevsdb;Port=5432;Database=Gevs;User Id=admin;Password=admin123
+      - IdentityServiceUrl=http://gevs-identity
+    ports:
+      - "8000:80"
+
+  gevs-identity:
+    container_name: gevs-identity
+    restart: always
+    depends_on:
+      - gevsdb
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings:DefaultConnection=Server=gevsdb;Port=5432;Database=Gevs;User Id=admin;Password=admin123
+    ports:
+      - "8100:80"

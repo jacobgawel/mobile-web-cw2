@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/gevs-backend/.vs/gevs-backend/FileContentIndex
+/gevs-backend/gevs-api/bin/Debug/net7.0
+/gevs-backend/gevs-identity/bin/Debug/net7.0
+/gevs-backend/gevs-identity/obj
+/gevs-backend/obj/Docker
