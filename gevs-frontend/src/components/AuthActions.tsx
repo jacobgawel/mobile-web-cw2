@@ -36,20 +36,28 @@ export default function AuthActions({ user, role }: Props) {
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                 <DropdownMenuItem>
-                    Profile
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                    <Link href={"/session"}>
-                        Session Details
-                    </Link> 
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                    <Link href={"/election-dashboard"}>
-                        Election Dashboard
+                    <Link href={"/profile"}>
+                        Profile
                     </Link>
                 </DropdownMenuItem>
+                { role === "admin" ? ( 
+                    // if the user is an admin, show the admin links
+                    <>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>
+                    <Link href={"/admin/session"}>
+                        Session Details
+                    </Link> 
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>
+                        <Link href={"/admin/election-dashboard"}>
+                            Election Dashboard
+                        </Link>
+                    </DropdownMenuItem>
+                    </>
+                ) : null
+                    }
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem className="cursor-pointer" onClick={() => signOut({callbackUrl: '/'})}>

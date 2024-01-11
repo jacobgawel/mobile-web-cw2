@@ -12,7 +12,6 @@ export const authOptions: NextAuthOptions = {
           clientSecret: 'secret',
           issuer: 'http://localhost:8100',
           authorization: {params: {scope: 'openid profile gevsApp'}},
-          idToken: true,
         })
     ],
     callbacks: {
@@ -25,6 +24,11 @@ export const authOptions: NextAuthOptions = {
                 token.Constituency = profile.Constituency;
                 token.UVC = profile.UVC;
             }
+
+            if(account) {
+                token.access_token = account.access_token;
+            }
+
             return token;
         },
         async session({session, token, user}) {
@@ -42,5 +46,4 @@ export const authOptions: NextAuthOptions = {
 }
  
 const handler = NextAuth(authOptions);
-
 export { handler as GET, handler as POST}

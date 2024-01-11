@@ -161,8 +161,7 @@ namespace gevs_api.Controller
         }
 
         // election management
-        [Authorize]
-        [HttpGet("admin/election")]
+        [HttpGet("election/status")]
         [ProducesResponseType(typeof(Election), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<Election>> GetElectionStatus()
         {
