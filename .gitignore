@@ -9,6 +9,5 @@
 /gevs-backend/obj
 /gevs-backend/.vs
 /gevs-api/obj
-*.csproj
 obj
 bin
