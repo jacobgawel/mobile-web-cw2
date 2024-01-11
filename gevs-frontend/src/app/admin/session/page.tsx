@@ -1,9 +1,16 @@
 import { getSession, getTokenClient } from "../../actions/authActions";
-import NavigationBar from "@/components/NavigationBar";
+
 
 export default async function Page() {
     const session = await getSession();
     const token = await getTokenClient();
+
+    // redirect the user to the / page if they are not an admin
+
+    if (session?.user.role !== 'admin') {
+        window.location.href = '/';
+    }
+
     return (
         <>
         <div className="text-2xl text-center m-5 font-semibold">Session</div>

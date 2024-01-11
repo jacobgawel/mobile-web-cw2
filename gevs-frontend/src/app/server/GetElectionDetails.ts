@@ -7,7 +7,8 @@ export async function getElectionDetails() {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-        }
+        }, 
+        cache: 'no-store'
     });
     // check if the response is ok
     if (!res.ok) {

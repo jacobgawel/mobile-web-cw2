@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { getSession } from "../actions/authActions"
+import { getSession } from "../../actions/authActions"
 
 export default async function ProfilePage() {
     

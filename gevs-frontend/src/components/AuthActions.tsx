@@ -36,7 +36,7 @@ export default function AuthActions({ user, role }: Props) {
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                 <DropdownMenuItem>
-                    <Link href={"/profile"}>
+                    <Link href={"/user/profile"}>
                         Profile
                     </Link>
                 </DropdownMenuItem>
