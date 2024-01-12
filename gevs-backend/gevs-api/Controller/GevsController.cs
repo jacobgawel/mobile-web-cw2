@@ -109,6 +109,12 @@ namespace gevs_api.Controller
             }
 
             var nameId = identity.FindFirst(ClaimTypes.NameIdentifier);
+            var constituency = identity.FindFirst("Constituency");
+
+            if (constituency == null)
+            {
+                return BadRequest("Invalid user, no constituency defined in claims");
+            }
 
             if (nameId == null)
             {
@@ -139,6 +145,13 @@ namespace gevs_api.Controller
             if (candidate == null)
             {
                 return NotFound("The candidate with that ID does not exist");
+            }
+
+            var candidateConstituency = await _constituencyRepository.GetConstituencyById(candidate.ConstituencyId);
+
+            if (candidateConstituency != null && constituency.Value != candidateConstituency.Name)
+            {
+                return BadRequest("You cannot vote for candidates that are not part of your constituency");
             }
 
             var result = await _candidateRepository.AddVoteToCandidate(candidate.Id);

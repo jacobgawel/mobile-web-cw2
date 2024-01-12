@@ -41,6 +41,13 @@ namespace gevs_api
 
             var app = builder.Build();
 
+            app.UseCors(cors =>
+            {
+                cors.AllowAnyOrigin();
+                cors.AllowAnyHeader();
+                cors.AllowAnyMethod();
+            });
+
             // Configure the HTTP request pipeline.
 
             app.UseAuthentication();
