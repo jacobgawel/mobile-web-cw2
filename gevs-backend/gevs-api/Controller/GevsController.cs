@@ -103,6 +103,13 @@ namespace gevs_api.Controller
         [ProducesResponseType(typeof(Candidate), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<Candidate>> AddVoteToCandidate(string id)
         {
+            var electionStatus = _electionRepository.GetElection();
+
+            if (!electionStatus.Result.Ongoing)
+            {
+                return BadRequest("There are currently no elections taking place");
+            }
+            
             if (User.Identity is not ClaimsIdentity identity)
             {
                 return Forbid();

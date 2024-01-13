@@ -35,6 +35,6 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
-      - ConnectionStrings:DefaultConnection=Server=gevsdb;Port=5432;Database=Gevs;User Id=admin;Password=admin123
+      - ConnectionStrings:DefaultConnection=Server=gevsdb;Port=5432;Database=Identity;User Id=admin;Password=admin123
     ports:
       - "8100:80"

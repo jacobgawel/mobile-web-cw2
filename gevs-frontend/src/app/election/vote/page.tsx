@@ -10,11 +10,9 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-  } from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
+  } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
 import { useEffect, useState } from "react";
-import { User } from "next-auth";
-import { Button } from "@/components/ui/button";
 import VoteButton from "./VoteButton";
 
 export default function ElectionPage() {
@@ -64,7 +62,7 @@ export default function ElectionPage() {
                                     <h2>Loading...</h2>
                                 </div>
                             ) : (
-                                candidateData.map((candidate: any, index: any) => {
+                                candidateData.map((candidate: any) => {
                                     return (
                                         <div key={candidate.id}>
                                             <Card className="m-5 w-[350px] text-center hover:bg-slate-50">
@@ -78,6 +76,7 @@ export default function ElectionPage() {
                                                         <Label className="text-gray-500">
                                                             {candidate.party}
                                                         </Label>
+                                                        
                                                     </CardDescription>
                                                 </CardContent>
                                                 <CardFooter style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

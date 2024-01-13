@@ -5,8 +5,6 @@ export default async function Page() {
     const session = await getSession();
     const token = await getTokenClient();
 
-    // redirect the user to the / page if they are not an admin
-
     if (session?.user.role !== 'admin') {
         window.location.href = '/';
     }

@@ -11,8 +11,6 @@ export default async function NavigationBar() {
   const user = await getCurrentUser();
   var role = user?.role;
 
-  let navItems: string[] = ["Home", "Election", "Election Results"]
-
   return (
     <>
       <header className='sticky top-0 z-50 flex justify-between bg-white p-5 items-center text-grey-800 shadow-md'>

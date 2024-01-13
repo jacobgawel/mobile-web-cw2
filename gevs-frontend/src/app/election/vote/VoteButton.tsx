@@ -9,8 +9,11 @@ export default function VoteButton(props: any) {
 
     function vote() {
         voteForCandidate(candidateId).then((response: any) => {
+
+            console.log("Response:", response)
+
             if (response.status === 400) {
-                toast.warning("You have already voted");
+                toast.warning("You cannot vote in this election");
             
             }
             else if (response.status === 200) {
@@ -22,6 +25,6 @@ export default function VoteButton(props: any) {
     }
 
     return (
-        <Button onClick={vote}>Vote</Button>
+        <Button variant="outline" onClick={vote}  >Vote</Button>
     );
 }
