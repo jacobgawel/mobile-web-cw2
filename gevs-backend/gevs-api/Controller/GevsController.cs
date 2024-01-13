@@ -180,6 +180,45 @@ namespace gevs_api.Controller
         {
             return Ok(await _electionRepository.GetElection());
         }
+        
+        // api endpoint for candidate result for endpoint
+        [HttpGet("election/candidate/{constituencyName}")]
+        [ProducesResponseType(typeof(ElectionCandidateResult), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<ElectionCandidateResult>> GetElectionCandidate(string constituencyName)
+        {
+            var candidates = await _candidateRepository.GetCandidatesByConstituency(constituencyName);
+
+            if (candidates == null)
+            {
+                return BadRequest("Candidates were not found using provided constituency");
+            }
+            
+            ElectionCandidateResult result = new ElectionCandidateResult();
+            List<ElectionCandidateBody> body = new List<ElectionCandidateBody>();
+            
+            // loop through candidates and put them in the body
+            foreach (var candidate in candidates)
+            {
+                var name = candidate.Name;
+                var candidateId = candidate.Id;
+                var party = await _partyRepository.GetPartyById(candidate.PartyId);
+                var partyName = party?.Name;
+                var votes = candidate.VoteCount;
+                
+                ElectionCandidateBody temp = new ElectionCandidateBody();
+                temp.Name = name;
+                temp.Id = candidateId;
+                temp.Party = partyName;
+                temp.Votes = votes;
+                
+                body.Add(temp);
+            }
+            
+            result.Constituency = constituencyName;
+            result.Candidates = body;
+
+            return Ok(result);
+        }
 
         [Authorize]
         [HttpPut("admin/election/{status:bool}")]

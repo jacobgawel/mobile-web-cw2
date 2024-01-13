@@ -22,5 +22,10 @@ namespace gevs_api.Repositories
         {
             return await _context.Constituencies.AsNoTracking().FirstOrDefaultAsync(c => c.Id == id);
         }
+
+        public async Task<Constituency?> GetConstituencyByName(string name)
+        {
+            return await _context.Constituencies.AsNoTracking().FirstOrDefaultAsync(c => c.Name == name);
+        }
     }
 }

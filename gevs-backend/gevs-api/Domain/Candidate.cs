@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace gevs_api.Domain
+﻿namespace gevs_api.Domain
 {
     public class Candidate
     {

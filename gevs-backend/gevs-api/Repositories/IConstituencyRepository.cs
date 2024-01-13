@@ -6,6 +6,7 @@ namespace gevs_api.Repositories
     {
         Task<List<Constituency>> GetConstituency();
         Task<Constituency?> GetConstituencyById(Guid id);
+        Task<Constituency?> GetConstituencyByName(string name);
     }
 }
 

@@ -1,7 +1,7 @@
 "use client";
 
-import { getCandidatesByConstituency } from "../server/GetCandidates";
-import { getCurrentUser } from "../actions/authActionsNoHeaders";
+import { getCandidatesByConstituency } from "../../server/GetCandidates";
+import { getCurrentUser } from "../../actions/authActionsNoHeaders";
 
 import {
     Card,
@@ -15,6 +15,7 @@ import { Label } from "@/components/ui/label"
 import { useEffect, useState } from "react";
 import { User } from "next-auth";
 import { Button } from "@/components/ui/button";
+import VoteButton from "./VoteButton";
 
 export default function ElectionPage() {
     const [canVote, setCanVote] = useState(false);
@@ -22,12 +23,14 @@ export default function ElectionPage() {
     const [user, setUser] = useState<any>([]);
     const [loading, setLoading] = useState(true);
 
+    console.log(candidateData)
+
     useEffect(() => {
         setLoading(true);
         getCurrentUser().then((user: any) => {
             setUser(user);
             getCandidatesByConstituency(user.Constituency).then((candidates: any) => {
-                setCandidateData(candidates.data.result);
+                setCandidateData(candidates.data.candidates);
                 setLoading(false);
             }).catch((error: any) => {
                 console.error("Error fetching candidates:", error);
@@ -48,11 +51,12 @@ export default function ElectionPage() {
     return (
         <>
         <div className="m-10">
-        <h1 className="text-2xl font-semibold">Vote here for the candidate in your constituency</h1>
+        <h1 className="text-2xl font-semibold">Vote here for the candidate in your constituency: {user.Constituency}</h1>
         {
             canVote ? (
                 <div>
                     <h2 className="m-5">You are eligible to vote</h2>
+                    <h3 className="m-5">Candidates:</h3>
                     <ul>
                         {
                             loading ? (
@@ -62,7 +66,7 @@ export default function ElectionPage() {
                             ) : (
                                 candidateData.map((candidate: any, index: any) => {
                                     return (
-                                        <div key={index}>
+                                        <div key={candidate.id}>
                                             <Card className="m-5 w-[350px] text-center hover:bg-slate-50">
                                                 <CardContent>
                                                     <CardHeader>
@@ -77,9 +81,7 @@ export default function ElectionPage() {
                                                     </CardDescription>
                                                 </CardContent>
                                                 <CardFooter style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                                    <Button variant={"outline"} className="pl-10 pr-10 hover:bg-slate-300">
-                                                        Vote
-                                                    </Button>
+                                                    <VoteButton candidateId={candidate.id} />
                                                 </CardFooter>
                                             </Card>
                                         </div>
