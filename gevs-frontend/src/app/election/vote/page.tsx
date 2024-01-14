@@ -49,9 +49,10 @@ export default function ElectionPage() {
     return (
         <>
         <div className="m-10">
-        <h1 className="text-2xl font-semibold">Vote here for the candidate in your constituency: {user.Constituency}</h1>
         {
             canVote ? (
+                <>
+                <h1 className="text-2xl font-semibold">Vote here for the candidate in your constituency: {user.Constituency}</h1>
                 <div>
                     <h2 className="m-5">You are eligible to vote</h2>
                     <h3 className="m-5">Candidates:</h3>
@@ -90,6 +91,7 @@ export default function ElectionPage() {
                         }
                     </ul>
                 </div>  
+                </>
             ) : (
                 <div>
                     <h2>You are not eligible to vote</h2>
