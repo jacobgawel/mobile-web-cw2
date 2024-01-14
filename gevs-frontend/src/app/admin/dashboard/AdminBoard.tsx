@@ -41,18 +41,33 @@ export default function AdminBoard() {
         toast.success(newElectionStatus ? "Election opened" : "Election closed");
     }
 
+
+    function updateChartData(data: any) {
+        var tempChartData = [["Party", "Votes", { role: "style" }]];
+        data.seats.map((item: any) => {
+            tempChartData.push([item.party, Number(item.seat), "#76A7FA"]);
+        });
+
+        setChartData(tempChartData);
+    }
+
     useEffect(() => {
         getElectionResult().then((res) => {
             const data = res.data;
             setElectionResult(data);
-            var tempChartData = [["Party", "Votes", { role: "style" }]];
-            data.seats.map((item: any) => {
-                tempChartData.push([item.party, Number(item.seat), "#76A7FA"]);
-            });
-    
-            setChartData(tempChartData);
+            updateChartData(data);
         })
     }, []);
+
+    function getUpdatedChartData() {
+        getElectionResult().then((res) => {
+            const data = res.data;
+            console.log(data)
+            setElectionResult(data);
+            updateChartData(data);
+            toast.success("Chart data updated");
+        })
+    }
 
     return (
         <>
@@ -85,7 +100,10 @@ export default function AdminBoard() {
             </Dialog>
         </div>
         <div className="m-10">
-            <h2>Election Results</h2>
+            <div className="flex">
+                <h2>Election Results</h2>
+                <Button className="ml-5" variant="outline" onClick={getUpdatedChartData}>Refresh</Button>
+            </div>
             <Chart chartType="BarChart" width="50%" height="400px" data={chartData} />
         </div>
         </>
