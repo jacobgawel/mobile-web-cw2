@@ -34,7 +34,7 @@ export default async function Home() {
             user != null && electionStatus ?
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <p className="mt-3 text-2xl">Make sure to vote before the election ends</p>
-              <Link href={"/election"}>
+              <Link href={"/election/vote"}>
                 <Button className="mt-3 p-5 pr-10 pl-10">Vote Here</Button>
               </Link>
             </div>

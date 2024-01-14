@@ -51,7 +51,7 @@ export default function AuthActions({ user, role }: Props) {
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>
-                        <Link href={"/admin/election-dashboard"}>
+                        <Link href={"/admin/dashboard"}>
                             Election Dashboard
                         </Link>
                     </DropdownMenuItem>
