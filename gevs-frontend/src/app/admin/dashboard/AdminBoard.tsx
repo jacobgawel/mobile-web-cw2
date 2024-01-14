@@ -25,6 +25,7 @@ export default function AdminBoard() {
     const [electionResult, setElectionResult] = useState<any>([]);
     const [electionResultStatus, setElectionResultStatus] = useState("");
     const [chartData, setChartData] = useState<any>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         getElectionDetails().then((res) => {
@@ -56,6 +57,7 @@ export default function AdminBoard() {
             const data = res.data;
             setElectionResult(data);
             updateChartData(data);
+            setLoading(false);
         })
     }, []);
 
@@ -66,7 +68,12 @@ export default function AdminBoard() {
             setElectionResult(data);
             updateChartData(data);
             toast.success("Chart data updated");
+            setElectionResultStatus(data.status);
         })
+    }
+
+    const optionsColumnChart = {
+        title: "Election Results",
     }
 
     return (
@@ -99,13 +106,19 @@ export default function AdminBoard() {
                 </DialogContent>
             </Dialog>
         </div>
+        {
+            loading ? (
+                <div className="text-2xl text-center m-5 font-semibold">Loading...</div>
+            ) : (
         <div className="m-10">
             <div className="flex">
-                <h2>Election Results</h2>
+                <h2 className="font-semibold">Election Dashboard</h2>
                 <Button className="ml-5" variant="outline" onClick={getUpdatedChartData}>Refresh</Button>
             </div>
-            <Chart chartType="BarChart" width="50%" height="400px" data={chartData} />
+            <Chart options={optionsColumnChart} chartType="BarChart" width="50%" height="400px" data={chartData} />
         </div>
+            )
+        }
         </>
     )
 }
