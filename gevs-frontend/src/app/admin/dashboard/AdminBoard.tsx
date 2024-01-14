@@ -9,8 +9,18 @@ import {
     DialogTrigger,
     DialogClose,
 } from "@/components/ui/dialog"
+import {
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableFooter,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getElectionDetails } from "@/app/server/GetElectionDetails";
 import { Badge } from "@/components/ui/badge"
 import { electionSwitch } from "@/app/server/ElectionSwitch";
@@ -18,14 +28,22 @@ import { toast } from "sonner";
 import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
 import { Chart } from "react-google-charts";
-import { getElectionResult } from "@/app/server/GetElectionResult";
+import { getElectionResult, getElectionResultByConstituency } from "@/app/server/GetElectionResult";
 
 export default function AdminBoard() {
     const [electionStatus, setElectionStatus] = useState(false);
-    const [electionResult, setElectionResult] = useState<any>([]);
     const [electionResultStatus, setElectionResultStatus] = useState("");
     const [chartData, setChartData] = useState<any>([]);
     const [loading, setLoading] = useState(true);
+    const [constituencyResults, setConstituencyResults] = useState<any>([]);
+
+    const constituencyList = [
+        "Shangri-la-Town",
+        "Northern-Kunlun-Mountain",
+        "Western-Shangri-la",
+        "Naboo-Vallery",
+        "New-Felucia"
+    ]
 
     useEffect(() => {
         getElectionDetails().then((res) => {
@@ -52,25 +70,46 @@ export default function AdminBoard() {
         setChartData(tempChartData);
     }
 
+    // this will populate the chartData array on load of the page
     useEffect(() => {
         getElectionResult().then((res) => {
             const data = res.data;
-            setElectionResult(data);
             updateChartData(data);
+            setElectionResultStatus(data.status);
             setLoading(false);
         })
     }, []);
 
+
+    // This function will be called when the refresh button is clicked
     function getUpdatedChartData() {
         getElectionResult().then((res) => {
             const data = res.data;
-            console.log(data)
-            setElectionResult(data);
             updateChartData(data);
             toast.success("Chart data updated");
             setElectionResultStatus(data.status);
         })
     }
+
+    // this will populate the constituencyResults array
+    // with the results of each constituency
+    useEffect(() => {
+        constituencyList.map((item) => {
+            getElectionResultByConstituency(item).then((res) => {
+                const data = res.data;
+                setConstituencyResults((prev: any) => {
+                    // Check if the constituency already exists in the array
+                    const exists = prev.some((existingData: any) => existingData.constituency === data.constituency);
+    
+                    if (!exists) {
+                        return [...prev, data];
+                    } else {
+                        return prev;
+                    }
+                });
+            })
+        })
+    }, [])
 
     const optionsColumnChart = {
         title: "Election Results",
@@ -80,7 +119,7 @@ export default function AdminBoard() {
         <>
         <div className="text-2xl text-left m-10 font-semibold">Dashboard</div>
             <Badge variant={"outline"} className="ml-10">Election Status: {electionStatus ? "Open" : "Closed"}</Badge>
-            <Badge variant={"outline"} className="ml-2">Election Result: {electionResult.status}</Badge>
+            <Badge variant={"outline"} className="ml-2">Election Result: {electionResultStatus}</Badge>
         <div className="ml-10 mt-5">
             <Dialog>
                 <DialogTrigger asChild>

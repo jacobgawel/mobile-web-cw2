@@ -27,7 +27,20 @@ export default function ElectionPage() {
         setLoading(true);
         getCurrentUser().then((user: any) => {
             setUser(user);
+
+            // make sure the admin can't vote
+            if (user.role === "admin") {
+                setCanVote(false);
+                setLoading(false);
+                return;
+            }
+
             getCandidatesByConstituency(user.Constituency).then((candidates: any) => {
+                if (candidates.data == null) {
+                    setCandidateData([]);
+                    setLoading(false);
+                    return;
+                }
                 setCandidateData(candidates.data.candidates);
                 setLoading(false);
             }).catch((error: any) => {

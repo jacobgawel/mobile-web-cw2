@@ -14,3 +14,20 @@ export async function getElectionResult() {
     }
     return { status: res.status, data: await res.json() }
 }
+
+export async function getElectionResultByConstituency(constituency: string) {
+    console.log("GetElectionResult.ts: getElectionResultByConstituency()");
+
+    const res = await fetch('http://localhost:8000/gevs/constituency/' + constituency, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }, 
+        cache: 'no-store'
+    });
+    // check if the response is ok
+    if (!res.ok) {
+        return { status: res.status, message: res.statusText}
+    }
+    return { status: res.status, data: await res.json() }
+}
