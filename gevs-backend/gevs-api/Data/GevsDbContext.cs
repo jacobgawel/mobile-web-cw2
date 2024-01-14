@@ -87,7 +87,8 @@ namespace gevs_api.Data
                     Name = "New-Felucia"
                 }
             );
-
+            
+            // 1 seat for RED
             modelBuilder.Entity<Candidate>().HasData(
                 new Candidate
                 {
@@ -114,7 +115,8 @@ namespace gevs_api.Data
                     VoteCount = 1
                 }
             );
-
+            
+            // 1 seat for RED
             modelBuilder.Entity<Candidate>().HasData(
                 new Candidate
                 {
@@ -130,7 +132,7 @@ namespace gevs_api.Data
                     Name = "candidate 2",
                     PartyId = blueId,
                     ConstituencyId = shangriId,
-                    VoteCount = 3
+                    VoteCount = 2
                 },
                 new Candidate
                 {
@@ -141,7 +143,8 @@ namespace gevs_api.Data
                     VoteCount = 1
                 }
             );
-
+            
+            // 1 seat for RED
             modelBuilder.Entity<Candidate>().HasData(
                 new Candidate
                 {
@@ -149,7 +152,7 @@ namespace gevs_api.Data
                     Name = "candidate 1",
                     PartyId = independentId,
                     ConstituencyId = westernId,
-                    VoteCount = 5
+                    VoteCount = 0
                 },
                 new Candidate
                 {
@@ -157,15 +160,15 @@ namespace gevs_api.Data
                     Name = "candidate 2",
                     PartyId = blueId,
                     ConstituencyId = westernId,
-                    VoteCount = 2
+                    VoteCount = 4
                 },
                 new Candidate
                 {
                     Id = Guid.NewGuid(),
                     Name = "candidate 3",
-                    PartyId = yellowId,
+                    PartyId = redId,
                     ConstituencyId = westernId,
-                    VoteCount = 1
+                    VoteCount = 2
                 }
             );
 
@@ -176,7 +179,7 @@ namespace gevs_api.Data
                     Name = "candidate 1",
                     PartyId = redId,
                     ConstituencyId = nabooId,
-                    VoteCount = 2
+                    VoteCount = 3
                 },
                 new Candidate
                 {
@@ -184,7 +187,7 @@ namespace gevs_api.Data
                     Name = "candidate 2",
                     PartyId = blueId,
                     ConstituencyId = nabooId,
-                    VoteCount = 10
+                    VoteCount = 0
                 },
                 new Candidate
                 {
@@ -195,7 +198,8 @@ namespace gevs_api.Data
                     VoteCount = 1
                 }
             );
-
+            
+            // 1 seat for yellow
             modelBuilder.Entity<Candidate>().HasData(
                 new Candidate
                 {
@@ -211,7 +215,7 @@ namespace gevs_api.Data
                     Name = "candidate 2",
                     PartyId = blueId,
                     ConstituencyId = newId,
-                    VoteCount = 10
+                    VoteCount = 0
                 },
                 new Candidate
                 {
