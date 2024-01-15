@@ -13,7 +13,6 @@ namespace gevs_api.Data
         public DbSet<Constituency> Constituencies { get; set; }
         public DbSet<Party> Parties { get; set; }
         public DbSet<Election> Elections { get; set; }
-        public DbSet<CandidateResult> CandidateResults { get; set; }
         public DbSet<VoteHistory> VoteHistory { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

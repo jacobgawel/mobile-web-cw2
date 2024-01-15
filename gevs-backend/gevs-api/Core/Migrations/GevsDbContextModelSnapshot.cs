@@ -48,140 +48,124 @@ namespace gevs_api.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7f7f340b-f012-4930-857d-10fd46c7faa1"),
-                            ConstituencyId = new Guid("85ce0a34-08be-4032-85e7-ef08224a4207"),
+                            Id = new Guid("4fa406d0-2c8e-4421-abf7-f97060ff191f"),
+                            ConstituencyId = new Guid("f4723331-b57a-4a0d-9f53-8f99308b224a"),
                             Name = "candidate 1",
-                            PartyId = new Guid("ef4264d7-aa9d-4476-ab43-225f82495cfa"),
+                            PartyId = new Guid("893bb9b4-a7d0-4f2d-ab51-5c20926540b5"),
                             VoteCount = 4
                         },
                         new
                         {
-                            Id = new Guid("e0ba1560-e696-41ab-9807-f84b11e31382"),
-                            ConstituencyId = new Guid("85ce0a34-08be-4032-85e7-ef08224a4207"),
+                            Id = new Guid("a45caa6d-89da-4ec5-980a-e34f3273e889"),
+                            ConstituencyId = new Guid("f4723331-b57a-4a0d-9f53-8f99308b224a"),
                             Name = "candidate 2",
-                            PartyId = new Guid("41d851f8-5e79-4edf-9d56-79ef517ab8ca"),
+                            PartyId = new Guid("937ecdb8-c1c6-4de6-a3a0-545fc0851427"),
                             VoteCount = 2
                         },
                         new
                         {
-                            Id = new Guid("3b476bf9-ce36-45e9-a8c1-971ec7f83d0f"),
-                            ConstituencyId = new Guid("85ce0a34-08be-4032-85e7-ef08224a4207"),
+                            Id = new Guid("af8be576-23e6-4b1d-86ce-e3dc72412f71"),
+                            ConstituencyId = new Guid("f4723331-b57a-4a0d-9f53-8f99308b224a"),
                             Name = "candidate 3",
-                            PartyId = new Guid("d74bc2eb-53ed-4001-a9bf-dd34ea5f4636"),
+                            PartyId = new Guid("7255eb5a-7b60-47ff-a5a8-557989fb3dc5"),
                             VoteCount = 1
                         },
                         new
                         {
-                            Id = new Guid("eff52ea8-1da1-4eaa-a110-723aade28ada"),
-                            ConstituencyId = new Guid("c6d95402-0669-43df-892f-0c0542879e19"),
+                            Id = new Guid("ee9ff9a3-2595-4e4e-9956-4acab4e0a5de"),
+                            ConstituencyId = new Guid("1f9c33e1-9793-4bf2-948e-1a31d1344d42"),
                             Name = "candidate 1",
-                            PartyId = new Guid("ef4264d7-aa9d-4476-ab43-225f82495cfa"),
+                            PartyId = new Guid("893bb9b4-a7d0-4f2d-ab51-5c20926540b5"),
                             VoteCount = 4
                         },
                         new
                         {
-                            Id = new Guid("1315993d-a94b-4410-a269-80bb91414988"),
-                            ConstituencyId = new Guid("c6d95402-0669-43df-892f-0c0542879e19"),
+                            Id = new Guid("9294aa06-f73c-4005-8cfb-0d976aa5085a"),
+                            ConstituencyId = new Guid("1f9c33e1-9793-4bf2-948e-1a31d1344d42"),
                             Name = "candidate 2",
-                            PartyId = new Guid("41d851f8-5e79-4edf-9d56-79ef517ab8ca"),
+                            PartyId = new Guid("937ecdb8-c1c6-4de6-a3a0-545fc0851427"),
                             VoteCount = 2
                         },
                         new
                         {
-                            Id = new Guid("cfb67c92-20c1-4984-8478-5506aeae3973"),
-                            ConstituencyId = new Guid("c6d95402-0669-43df-892f-0c0542879e19"),
+                            Id = new Guid("7433e71a-f895-4e20-b609-582b5acd2a64"),
+                            ConstituencyId = new Guid("1f9c33e1-9793-4bf2-948e-1a31d1344d42"),
                             Name = "candidate 3",
-                            PartyId = new Guid("d74bc2eb-53ed-4001-a9bf-dd34ea5f4636"),
+                            PartyId = new Guid("7255eb5a-7b60-47ff-a5a8-557989fb3dc5"),
                             VoteCount = 1
                         },
                         new
                         {
-                            Id = new Guid("160c5591-5abb-4432-9695-d885907bebf3"),
-                            ConstituencyId = new Guid("914fc076-9d45-4802-bcc5-1697a5b46e82"),
+                            Id = new Guid("953c2d2f-0536-4117-acf4-8a3f81586454"),
+                            ConstituencyId = new Guid("90d0c297-68a5-4f3a-9de9-4d459c008a21"),
                             Name = "candidate 1",
-                            PartyId = new Guid("60a58d3b-acc0-4022-ad5a-6e33e21d5a6d"),
+                            PartyId = new Guid("e9188345-4789-43b0-a185-eaa19dccda36"),
                             VoteCount = 0
                         },
                         new
                         {
-                            Id = new Guid("754c3e8c-0cf5-4574-9cc4-283281336e23"),
-                            ConstituencyId = new Guid("914fc076-9d45-4802-bcc5-1697a5b46e82"),
+                            Id = new Guid("9e3cf705-f0bd-410f-9830-ac7ef38efac1"),
+                            ConstituencyId = new Guid("90d0c297-68a5-4f3a-9de9-4d459c008a21"),
                             Name = "candidate 2",
-                            PartyId = new Guid("41d851f8-5e79-4edf-9d56-79ef517ab8ca"),
+                            PartyId = new Guid("937ecdb8-c1c6-4de6-a3a0-545fc0851427"),
                             VoteCount = 4
                         },
                         new
                         {
-                            Id = new Guid("20cf66cc-1f03-4068-908d-17a4f3e90076"),
-                            ConstituencyId = new Guid("914fc076-9d45-4802-bcc5-1697a5b46e82"),
+                            Id = new Guid("589c21f2-6191-4f16-a9bf-f72899b455b7"),
+                            ConstituencyId = new Guid("90d0c297-68a5-4f3a-9de9-4d459c008a21"),
                             Name = "candidate 3",
-                            PartyId = new Guid("ef4264d7-aa9d-4476-ab43-225f82495cfa"),
+                            PartyId = new Guid("893bb9b4-a7d0-4f2d-ab51-5c20926540b5"),
                             VoteCount = 2
                         },
                         new
                         {
-                            Id = new Guid("591f7df8-6220-4469-8f33-323708566a1f"),
-                            ConstituencyId = new Guid("ddbe8b38-9967-4642-af8f-48ed6d6d9bca"),
+                            Id = new Guid("d0c1238f-fc75-49d4-b36a-8fd502ac642d"),
+                            ConstituencyId = new Guid("1dc37ad0-4e86-4202-8c41-db8abde152a6"),
                             Name = "candidate 1",
-                            PartyId = new Guid("ef4264d7-aa9d-4476-ab43-225f82495cfa"),
+                            PartyId = new Guid("893bb9b4-a7d0-4f2d-ab51-5c20926540b5"),
                             VoteCount = 3
                         },
                         new
                         {
-                            Id = new Guid("bf6b722f-c8cb-488f-a765-b7fca7c2e5a6"),
-                            ConstituencyId = new Guid("ddbe8b38-9967-4642-af8f-48ed6d6d9bca"),
+                            Id = new Guid("8c8e0376-0a84-4a98-8f8a-a667aa607141"),
+                            ConstituencyId = new Guid("1dc37ad0-4e86-4202-8c41-db8abde152a6"),
                             Name = "candidate 2",
-                            PartyId = new Guid("41d851f8-5e79-4edf-9d56-79ef517ab8ca"),
+                            PartyId = new Guid("937ecdb8-c1c6-4de6-a3a0-545fc0851427"),
                             VoteCount = 0
                         },
                         new
                         {
-                            Id = new Guid("81c6b534-5ba9-446e-a817-338b9ed91eca"),
-                            ConstituencyId = new Guid("ddbe8b38-9967-4642-af8f-48ed6d6d9bca"),
+                            Id = new Guid("db0ba7bd-a0c5-4c1e-bb4b-c4cb047fc3ea"),
+                            ConstituencyId = new Guid("1dc37ad0-4e86-4202-8c41-db8abde152a6"),
                             Name = "candidate 3",
-                            PartyId = new Guid("d74bc2eb-53ed-4001-a9bf-dd34ea5f4636"),
+                            PartyId = new Guid("7255eb5a-7b60-47ff-a5a8-557989fb3dc5"),
                             VoteCount = 1
                         },
                         new
                         {
-                            Id = new Guid("796bf78c-a716-4874-8b20-2bb106f51e74"),
-                            ConstituencyId = new Guid("664e1e29-dde9-4439-b871-386e23ca1c4f"),
+                            Id = new Guid("096941a7-9287-49bc-b856-ef212a2bd6b0"),
+                            ConstituencyId = new Guid("b15ba89f-7119-419a-a9ef-1d0324970eb6"),
                             Name = "candidate 1",
-                            PartyId = new Guid("ef4264d7-aa9d-4476-ab43-225f82495cfa"),
+                            PartyId = new Guid("893bb9b4-a7d0-4f2d-ab51-5c20926540b5"),
                             VoteCount = 2
                         },
                         new
                         {
-                            Id = new Guid("1df90766-8e94-4678-a9b8-6cd85765710a"),
-                            ConstituencyId = new Guid("664e1e29-dde9-4439-b871-386e23ca1c4f"),
+                            Id = new Guid("0ca537c5-3a31-4a22-ab07-92cd219646cd"),
+                            ConstituencyId = new Guid("b15ba89f-7119-419a-a9ef-1d0324970eb6"),
                             Name = "candidate 2",
-                            PartyId = new Guid("41d851f8-5e79-4edf-9d56-79ef517ab8ca"),
+                            PartyId = new Guid("937ecdb8-c1c6-4de6-a3a0-545fc0851427"),
                             VoteCount = 0
                         },
                         new
                         {
-                            Id = new Guid("56e4fe23-cd99-40b0-9463-86083cc7aeba"),
-                            ConstituencyId = new Guid("664e1e29-dde9-4439-b871-386e23ca1c4f"),
+                            Id = new Guid("0da8fdad-980a-43a9-a07e-1d12a149f51f"),
+                            ConstituencyId = new Guid("b15ba89f-7119-419a-a9ef-1d0324970eb6"),
                             Name = "candidate 3",
-                            PartyId = new Guid("d74bc2eb-53ed-4001-a9bf-dd34ea5f4636"),
+                            PartyId = new Guid("7255eb5a-7b60-47ff-a5a8-557989fb3dc5"),
                             VoteCount = 6
                         });
-                });
-
-            modelBuilder.Entity("gevs_api.Domain.CandidateResult", b =>
-                {
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Party")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("Vote")
-                        .HasColumnType("integer");
-
-                    b.ToTable("CandidateResults");
                 });
 
             modelBuilder.Entity("gevs_api.Domain.Constituency", b =>
@@ -201,27 +185,27 @@ namespace gevs_api.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c6d95402-0669-43df-892f-0c0542879e19"),
+                            Id = new Guid("1f9c33e1-9793-4bf2-948e-1a31d1344d42"),
                             Name = "Shangri-la-Town"
                         },
                         new
                         {
-                            Id = new Guid("85ce0a34-08be-4032-85e7-ef08224a4207"),
+                            Id = new Guid("f4723331-b57a-4a0d-9f53-8f99308b224a"),
                             Name = "Northern-Kunlun-Mountain"
                         },
                         new
                         {
-                            Id = new Guid("914fc076-9d45-4802-bcc5-1697a5b46e82"),
+                            Id = new Guid("90d0c297-68a5-4f3a-9de9-4d459c008a21"),
                             Name = "Western-Shangri-la"
                         },
                         new
                         {
-                            Id = new Guid("ddbe8b38-9967-4642-af8f-48ed6d6d9bca"),
+                            Id = new Guid("1dc37ad0-4e86-4202-8c41-db8abde152a6"),
                             Name = "Naboo-Vallery"
                         },
                         new
                         {
-                            Id = new Guid("664e1e29-dde9-4439-b871-386e23ca1c4f"),
+                            Id = new Guid("b15ba89f-7119-419a-a9ef-1d0324970eb6"),
                             Name = "New-Felucia"
                         });
                 });
@@ -242,7 +226,7 @@ namespace gevs_api.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0c2cd979-8dd6-4993-a0ad-beb3d892592e"),
+                            Id = new Guid("446ad0ad-5eba-4479-92c8-45e2d45340e8"),
                             Ongoing = false
                         });
                 });
@@ -264,22 +248,22 @@ namespace gevs_api.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ef4264d7-aa9d-4476-ab43-225f82495cfa"),
+                            Id = new Guid("893bb9b4-a7d0-4f2d-ab51-5c20926540b5"),
                             Name = "Red Party"
                         },
                         new
                         {
-                            Id = new Guid("41d851f8-5e79-4edf-9d56-79ef517ab8ca"),
+                            Id = new Guid("937ecdb8-c1c6-4de6-a3a0-545fc0851427"),
                             Name = "Blue Party"
                         },
                         new
                         {
-                            Id = new Guid("d74bc2eb-53ed-4001-a9bf-dd34ea5f4636"),
+                            Id = new Guid("7255eb5a-7b60-47ff-a5a8-557989fb3dc5"),
                             Name = "Yellow Party"
                         },
                         new
                         {
-                            Id = new Guid("60a58d3b-acc0-4022-ad5a-6e33e21d5a6d"),
+                            Id = new Guid("e9188345-4789-43b0-a185-eaa19dccda36"),
                             Name = "Independent"
                         });
                 });

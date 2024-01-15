@@ -249,6 +249,33 @@ namespace gevs_api.Controller
                 return Forbid();
             }
 
+            if (status)
+            {
+                var resultHistory = await _voteHistoryRepository.DeleteVoteHistory();
+                var candidates = await _candidateRepository.GetCandidates();
+
+                var errors = false;
+
+                foreach (var candidate in candidates)
+                {
+                    var result = await _candidateRepository.DeleteCandidateVotes(candidate.Id);
+                    if (!result)
+                    {
+                        errors = true;
+                    }
+                }
+
+                if (!resultHistory)
+                {
+                    return StatusCode(500, "Something went wrong while deleting vote history");
+                }
+
+                if (errors)
+                {
+                    return StatusCode(500, "Something went wrong while deleting candidate votes");
+                }
+            }
+
             return Ok(await _electionRepository.UpdateElectionStatus(status));
         }
 

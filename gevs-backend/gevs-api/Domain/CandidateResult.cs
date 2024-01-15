@@ -2,7 +2,6 @@
 
 namespace gevs_api.Domain
 {
-    [Keyless]
     public class CandidateResult
     {
         public string Name { get; set; }

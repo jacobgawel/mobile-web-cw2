@@ -9,16 +9,6 @@ import {
     DialogTrigger,
     DialogClose,
 } from "@/components/ui/dialog"
-import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableFooter,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { getElectionDetails } from "@/app/server/GetElectionDetails";
@@ -154,7 +144,7 @@ export default function AdminBoard() {
                 <h2 className="font-semibold">Election Dashboard</h2>
                 <Button className="ml-5" variant="outline" onClick={getUpdatedChartData}>Refresh</Button>
             </div>
-            <Chart options={optionsColumnChart} chartType="BarChart" width="50%" height="400px" data={chartData} />
+            <Chart options={optionsColumnChart} chartType="BarChart" width="70%" height="400px" data={chartData} />
         </div>
             )
         }
