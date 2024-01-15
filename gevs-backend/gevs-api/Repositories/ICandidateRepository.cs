@@ -11,5 +11,6 @@ namespace gevs_api.Repositories
         Task<bool> AddVoteToCandidate(Guid id);
         Task<List<Candidate>?> GetCandidatesByConstituency(string constituencyName);
         Task<ConstituencyResult> GetConstituencyResults(List<Candidate> candidates, string constituencyName);
+        Task<bool> DeleteCandidateVotes(Guid id);
     }
 }

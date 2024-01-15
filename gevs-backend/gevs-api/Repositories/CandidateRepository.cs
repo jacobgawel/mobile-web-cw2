@@ -115,5 +115,15 @@ namespace gevs_api.Repositories
 
             return result;
         }
+
+        public async Task<bool> DeleteCandidateVotes(Guid id)
+        {
+            var candidate = await _context.Candidates.FirstOrDefaultAsync(c => c.Id == id);
+            if (candidate == null) return false;
+            candidate.VoteCount = 0;
+            await _context.SaveChangesAsync();
+            return true;
+
+        }
     }
 }
