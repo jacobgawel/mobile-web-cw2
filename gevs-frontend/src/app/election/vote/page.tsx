@@ -14,12 +14,14 @@ import {
 import { Label } from "@/components/ui/label";
 import { useEffect, useState } from "react";
 import VoteButton from "./VoteButton";
+import { getElectionDetails } from "@/app/server/GetElectionDetails";
 
 export default function ElectionPage() {
     const [canVote, setCanVote] = useState(false);
     const [candidateData, setCandidateData] = useState<any>([]);
     const [user, setUser] = useState<any>([]);
     const [loading, setLoading] = useState(true);
+    const [electionStatus, setElectionStatus] = useState(false);
 
     console.log(candidateData)
 
@@ -35,6 +37,11 @@ export default function ElectionPage() {
                 return;
             }
 
+            if(user.role == "voter") {
+                setCanVote(true);
+                setLoading(false);
+            }
+
             getCandidatesByConstituency(user.Constituency).then((candidates: any) => {
                 if (candidates.data == null) {
                     setCandidateData([]);
@@ -46,24 +53,31 @@ export default function ElectionPage() {
             }).catch((error: any) => {
                 console.error("Error fetching candidates:", error);
             });
+
         }).catch((error: any) => {
             console.error("Error fetching user:", error);
         });
     }, []);
 
     useEffect(() => {
-        if (user.role === "voter") {
-            setCanVote(true);
-        }
-    }, [user]);
+        getElectionDetails().then((electionDetails: any) => {
+            console.log("Election details:", electionDetails);
+            if (electionDetails.data.ongoing) {
+                setElectionStatus(true);
+            }
+        }, (error: any) => {
+            console.error("Error fetching election details:", error);
+        });
+    }, []);
 
     console.log("Candidate data:", candidateData);
+    console.log(canVote)
 
     return (
         <>
         <div className="m-10">
         {
-            canVote ? (
+            electionStatus && canVote ? (
                 <>
                 <h1 className="text-2xl font-semibold">Vote here for the candidate in your constituency: {user.Constituency}</h1>
                 <div>
@@ -107,7 +121,7 @@ export default function ElectionPage() {
                 </>
             ) : (
                 <div>
-                    <h2>You are not eligible to vote</h2>
+                    <h2>You cannot vote at this time.</h2>
                 </div>
             )
         }
