@@ -2,7 +2,7 @@
 
 ## Tech Stack
 - Frontend: NextJS (ReactJS) 13 (App Router)
-- Backend: C# .NET 7 (API)
+- Backend: C# .NET 7 (API) - Attempted to use .NET 8 but had issues with Identity Server authentication in endpoints, so reverted to .NET 7. I realised its not fully supported.
 - Database: PostgreSQL (Database)
 - Deployment: Docker (Containerization)
 
@@ -14,11 +14,27 @@
 5. Run `npm run dev` in the `frontend` directory
 6. Open `http://localhost:3000` in your browser
 
+### Docker Compose
+The `docker-compose.yml` file contains the following services:
+- `gevsdb` - The PostgreSQL database
+- `gevs-api` - The .NET API
+- `gevs-identity` - Identity Server
+
+The docker compose should run all of these services and link them together.
+
 ## How to use
+### User
 1. Register an account
 2. Login
 3. Vote on an election
 4. View the results of an election (once the admin has closed the election)
+### Admin
+1. The admin account is created when the database is created.
+2. Login with the admin account
+3. Open an election
+4. View the results of an election
+5. Close an election
+6. Restart an election - this will delete all votes and reset the election results
 
 ## API Endpoints
 
@@ -56,3 +72,7 @@ Returns the candidate details for a given constituency
 - `/admin/session` - Admin session details which hold the tokens for the admin API endpoints
 - `/admin/dashboard` - Admin dashboard (only accessible if logged in as an admin)
 
+### Extra notes
+
+- When restarting an election as an admin, all votes for the candidates are zeroed.
+- You may have to refresh the webpage occasionally to see the update on the home page since the website is an SPA.
